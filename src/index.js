@@ -36,17 +36,9 @@ app.get('/totalDeath', (req, res) => {
         let k = data[i];
         dead += Number(k['death']);
     }
-    res.json({ data: { _id: 'total', active: dead } });
+    res.json({ data: { _id: 'total', death: dead } });
 })
 
-app.get('/totalDeath', (req, res) => {
-    let dead = 0;
-    for (let i = 0; i < data.length; i++) {
-        let k = data[i];
-        dead += Number(k['death']);
-    }
-    res.json({ data: { _id: 'total', active: dead } });
-})
 
 app.get('/hotspotStates', (req, res) => {
     let dead = [];
@@ -73,7 +65,7 @@ app.get('/healthyStates', (req, res) => {
         let death = k['death'];
         let diff = (Number(death) / Number(infected));
         diff = diff.toFixed(5);
-        if (diff < 0.05) {
+        if (diff < 0.005) {
             dead.push({ state: k['state'], mortality: diff });
         }
     }
